@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand palette · 10 retninger</title>
+  <style>
+    @font-face {
+      font-family: 'PP Neue Montreal';
+      src: url('fonts/PPNeueMontreal-Book.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'PP Neue Montreal';
+      src: url('fonts/PPNeueMontreal-Medium.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    :root {
+      --font-heading: 'PP Neue Montreal', -apple-system, system-ui, sans-serif;
+      --font-body:    'PP Neue Montreal', -apple-system, system-ui, sans-serif;
+      --font-mono:    var(--font-mono);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #FCFCFC; color: #131313;
+      font-family: var(--font-body);
+      font-size: 16px; line-height: 1.55;
+      letter-spacing: -0.005em;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'ss01', 'ss02';
+      padding: 64px 32px 96px;
+      min-height: 100vh;
+    }
+    h1, h2, .group-header { font-family: var(--font-heading); }
+    .container { max-width: 1320px; margin: 0 auto; }
+
+    .meta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #6B6B6B; margin-bottom: 40px;
+    }
+    .meta-dot { width: 6px; height: 6px; border-radius: 50%; background: #131313; }
+
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      font-weight: 500; letter-spacing: -0.045em; line-height: 0.95;
+      margin-bottom: 32px; max-width: 1100px;
+    }
+    h1 em { font-style: italic; }
+
+    .lede {
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      color: #6B6B6B; max-width: 640px; margin-bottom: 56px;
+      letter-spacing: -0.005em;
+    }
+
+    .group-header {
+      display: flex; align-items: baseline; gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #131313; margin: 56px 0 20px;
+    }
+    .group-header::after {
+      content: ''; flex: 1; height: 1px; background: rgba(19,19,19,0.10);
+    }
+    .group-header .num { color: #6B6B6B; }
+    .group-header .desc { color: #6B6B6B; font-family: var(--font-body); text-transform: none; letter-spacing: -0.005em; font-size: 13px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid rgba(19, 19, 19, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none; color: inherit;
+      transition: transform 0.25s, border-color 0.2s;
+      display: block;
+    }
+    .card:hover { transform: translateY(-4px); }
+
+    .preview {
+      height: 200px; padding: 24px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+      background: #FCFCFC;
+    }
+    .preview::after {
+      content: ''; position: absolute;
+      bottom: -60px; right: -40px;
+      width: 220px; height: 220px; border-radius: 50%;
+      opacity: 0.20; filter: blur(40px);
+    }
+    .preview-row { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+    .preview-mark {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 15px; font-weight: 500;
+    }
+    .preview-num {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+    }
+    .preview-swatches { display: flex; gap: 5px; align-items: center; position: relative; z-index: 1; }
+    .swatch { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
+
+    .card-body { padding: 22px 24px 24px; border-top: 1px solid rgba(19,19,19,0.06); }
+    .card h2 {
+      font-size: 21px; font-weight: 500; letter-spacing: -0.025em;
+      margin-bottom: 6px; line-height: 1.1;
+    }
+    .card p { font-size: 13.5px; color: #6B6B6B; line-height: 1.55; margin-bottom: 16px; max-width: 300px; }
+    .card-meta {
+      font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+      font-family: var(--font-mono);
+      color: #6B6B6B;
+      display: flex; gap: 12px; align-items: center;
+      margin-bottom: 14px;
+    }
+    .card-meta .name { color: #131313; }
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; transition: gap 0.15s;
+    }
+    .card:hover .card-cta { gap: 12px; }
+
+    /* Sober palettes */
+    .card-vermillion .preview-mark, .card-vermillion .preview::after { background: #CF4118; }
+    .card-vermillion:hover { border-color: #CF4118; }
+    .card-vermillion .card-cta { color: #CF4118; }
+
+    .card-klein .preview-mark, .card-klein .preview::after { background: #002FA7; }
+    .card-klein:hover { border-color: #002FA7; }
+    .card-klein .card-cta { color: #002FA7; }
+
+    .card-forest .preview-mark, .card-forest .preview::after { background: #1F5E3A; }
+    .card-forest:hover { border-color: #1F5E3A; }
+    .card-forest .card-cta { color: #1F5E3A; }
+
+    /* Bold palettes */
+    .card-rosso .preview-mark, .card-rosso .preview::after { background: #C8102E; }
+    .card-rosso:hover { border-color: #C8102E; }
+    .card-rosso .card-cta { color: #C8102E; }
+
+    .card-schiap .preview-mark, .card-schiap .preview::after { background: #DA1E7F; }
+    .card-schiap:hover { border-color: #DA1E7F; }
+    .card-schiap .card-cta { color: #DA1E7F; }
+
+    .card-plum .preview-mark, .card-plum .preview::after { background: #6D28D9; }
+    .card-plum:hover { border-color: #6D28D9; }
+    .card-plum .card-cta { color: #6D28D9; }
+
+    .card-tangerine .preview-mark, .card-tangerine .preview::after { background: #EA580C; }
+    .card-tangerine:hover { border-color: #EA580C; }
+    .card-tangerine .card-cta { color: #EA580C; }
+
+    .card-solar .preview-mark { background: #FACC15; color: #131313; }
+    .card-solar .preview::after { background: #FACC15; }
+    .card-solar:hover { border-color: #FACC15; }
+    .card-solar .card-cta { color: #CA8A04; }
+
+    .card-flame .preview-mark, .card-flame .preview::after { background: #FF3D14; }
+    .card-flame:hover { border-color: #FF3D14; }
+    .card-flame .card-cta { color: #FF3D14; }
+
+    .card-cinnabar .preview-mark, .card-cinnabar .preview::after { background: #D43616; }
+    .card-cinnabar:hover { border-color: #D43616; }
+    .card-cinnabar .card-cta { color: #D43616; }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(19,19,19,0.08);
+      font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: 0.04em; color: #6B6B6B;
+      line-height: 1.65;
+    }
+    footer strong { color: #131313; font-weight: 500; }
+
+    @media (max-width: 720px) {
+      body { padding: 40px 20px 64px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="meta">
+      <span class="meta-dot"></span>
+      <span>Atelier · brand·sammenligning · 2026 / Q3</span>
+    </div>
+
+    <h1>Ti paletter. Samme layout.<br>Vælg den der bærer historien <em>bedst</em>.</h1>
+
+    <p class="lede">Identisk indhold, identisk struktur — kun farverne ændrer sig. Tre sober retninger og syv bold der står frem. Klik dig ind på hver og scroll til bunden for at se palette-reglerne synligt.</p>
+
+    <div class="group-header">
+      <span><span class="num">001</span> / Sober</span>
+      <span class="desc">Modne accenter til langsigtede brands</span>
+    </div>
+
+    <div class="grid">
+
+      <a class="card card-vermillion" href="preview-vermillion.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">A / 01</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #CF4118;"></div>
+            <div class="swatch" style="background: #FBE1D4;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Vermillion</span><span>#CF4118</span></div>
+          <h2>Energisk burnt orange.</h2>
+          <p>Kreativitet og varme uden at blive efterårs-kliché. Til ambitiøse studios og kreative virksomheder.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-klein" href="preview-klein.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">A / 02</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #002FA7;"></div>
+            <div class="swatch" style="background: #DDE3F4;"></div>
+            <div class="swatch" style="background: #14151D;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Klein</span><span>#002FA7</span></div>
+          <h2>Yves Kleins blå.</h2>
+          <p>Intellektuelt, editorial, urokkelig. Til virksomheder med kulturel kapital og lang horisont.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-forest" href="preview-forest.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">A / 03</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #1F5E3A;"></div>
+            <div class="swatch" style="background: #D8E5DD;"></div>
+            <div class="swatch" style="background: #15201A;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Forest</span><span>#1F5E3A</span></div>
+          <h2>Dyb skovgrøn.</h2>
+          <p>Organisk, sofistikeret, langsigtet. Til virksomheder der vil signalere ro og bæredygtighed.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="group-header">
+      <span><span class="num">002</span> / Bold</span>
+      <span class="desc">Accenter der står frem og kommanderer rummet</span>
+    </div>
+
+    <div class="grid">
+
+      <a class="card card-rosso" href="preview-rosso.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 01</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #C8102E;"></div>
+            <div class="swatch" style="background: #FCE5E8;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Rosso</span><span>#C8102E</span></div>
+          <h2>Power red.</h2>
+          <p>Hermès- og Ferrari-territorium. Passion, autoritet, urgency. Til brands der ikke er bange for at blive set.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-schiap" href="preview-schiap.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 02</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #DA1E7F;"></div>
+            <div class="swatch" style="background: #FCE4F0;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Schiap</span><span>#DA1E7F</span></div>
+          <h2>Schiaparelli pink.</h2>
+          <p>Surreal, kommanderende, fashion-bold. Til brands der vil tage en kategori og holde den.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-plum" href="preview-plum.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 03</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #6D28D9;"></div>
+            <div class="swatch" style="background: #DDD6FE;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Plum</span><span>#6D28D9</span></div>
+          <h2>Electric violet.</h2>
+          <p>Premium tech-bold (Stripe/Discord-territorium). Intellektuelt men med attitude — ikke kedeligt blåt.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-tangerine" href="preview-tangerine.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 04</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #EA580C;"></div>
+            <div class="swatch" style="background: #FED7AA;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Tangerine</span><span>#EA580C</span></div>
+          <h2>Pure energi-orange.</h2>
+          <p>Tech-startup attitude. Vågner folk op — mere "Look at us" end Vermillions editorial varme.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-solar" href="preview-solar.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 05</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #FACC15;"></div>
+            <div class="swatch" style="background: #FEF3C7;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Solar</span><span>#FACC15</span></div>
+          <h2>Solar yellow.</h2>
+          <p>Maks opmærksomhed. Kræver mørk tekst på accent — bryder kontrast-reglen, men kommanderer rummet.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-cinnabar" href="preview-cinnabar.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 06</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #D43616;"></div>
+            <div class="swatch" style="background: #FBE0D6;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Cinnabar</span><span>#D43616</span></div>
+          <h2>Cinnabar pigment.</h2>
+          <p>Mellem Vermillion og Flame. Historisk pigmentnavn — mere mættet end Vermillion, mere grounded end Flame. Klarer WCAG AA.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+      <a class="card card-flame" href="preview-flame.html">
+        <div class="preview">
+          <div class="preview-row">
+            <div class="preview-mark">A</div>
+            <div class="preview-num">B / 07</div>
+          </div>
+          <div class="preview-swatches">
+            <div class="swatch" style="background: #FCFCFC;"></div>
+            <div class="swatch" style="background: #FF3D14;"></div>
+            <div class="swatch" style="background: #FFE0D6;"></div>
+            <div class="swatch" style="background: #131313;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span>Variant</span><span class="name">Flame</span><span>#FF3D14</span></div>
+          <h2>Flame scarlet.</h2>
+          <p>Den lyseste, mest mættede rød-orange i hele paletten. Maksimum energi, urgency og signal — for brands der ikke har tid til at være subtile.</p>
+          <span class="card-cta">Åbn preview →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <footer>
+      <strong>Stadig på brainstorm-listen</strong> — Cobalt (#0047CC), Acid Lime (#65A30D / Bottega), Mustard Gold (#B45309), Cyber Cyan (#0891B2), Sapphire (#1E40AF), Burgundy Rose (#BE185D). Sig hvilke der trækker, så bygger jeg dem.
+    </footer>
+  </div>
+
+  <style>
+    /* Font switcher styling — kopi af preview-stilen så index også har den */
+    .font-switcher {
+      position: fixed; top: 20px; right: 20px; z-index: 100;
+      background: #131313; color: #FCFCFC;
+      padding: 10px 12px; border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+      font-family: var(--font-mono); font-size: 11px;
+      display: flex; flex-direction: column; gap: 6px;
+      max-width: calc(100vw - 40px);
+    }
+    .font-switcher-row { display: flex; align-items: center; gap: 4px; flex-wrap: nowrap; }
+    .font-switcher-label {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(252,252,252,0.45); width: 42px; flex-shrink: 0;
+    }
+    .font-switcher-pill {
+      font-family: inherit; font-size: 11px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 5px 10px; border-radius: 999px;
+      color: rgba(252,252,252,0.55);
+      background: transparent; border: none; cursor: pointer;
+      white-space: nowrap; transition: color 0.15s, background 0.15s;
+    }
+    .font-switcher-pill:hover:not(.active) { color: #FCFCFC; }
+    .font-switcher-pill.active { background: #131313; color: #FFFFFF; outline: 1px solid #FCFCFC; }
+    @media (max-width: 980px) {
+      .font-switcher { top: 12px; right: 12px; padding: 8px 10px; }
+      .font-switcher-pill { padding: 4px 8px; font-size: 10px; }
+    }
+  </style>
+  <script src="script.js"></script>
+</body>
+</html>
