@@ -70,13 +70,19 @@
       <a href="#" class="logo-mark-block">
         <span class="logo-mark-svg">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Loud Colors mark">
-            <g transform="rotate(-8 50 50)">
-              <!-- shadow / offset layer -->
-              <polygon points="22,32 74,32 74,50 46,50 46,78 22,78" fill="rgba(255,255,255,0.30)"/>
-              <!-- main L shape -->
-              <polygon points="28,22 80,22 80,42 52,42 52,72 28,72" fill="#FCFCFC"/>
-              <!-- diagonal cut accent on top right -->
-              <polygon points="62,22 80,22 80,42 70,42" fill="rgba(0,0,0,0.18)"/>
+            <g transform="rotate(-12 50 50)">
+              <!-- Ghost / backdrop layer (offset, semi-transparent) -->
+              <g opacity="0.32">
+                <!-- Backwards-L (top + left down) -->
+                <polygon points="22,30 52,30 52,42 34,42 34,78 22,78" fill="#FCFCFC"/>
+                <!-- 7 (top + right down) -->
+                <polygon points="52,30 82,30 82,78 70,78 70,42 52,42" fill="#FCFCFC"/>
+              </g>
+              <!-- Main solid layer -->
+              <!-- Backwards-L (left arrow) -->
+              <polygon points="16,22 48,22 48,34 28,34 28,72 16,72" fill="#FCFCFC"/>
+              <!-- 7 (right arrow) -->
+              <polygon points="52,22 84,22 84,72 72,72 72,34 52,34" fill="#FCFCFC"/>
             </g>
           </svg>
         </span>
