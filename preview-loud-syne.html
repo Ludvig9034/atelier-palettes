@@ -42,19 +42,24 @@
       text-decoration: none; color: var(--text);
     }
     .logo-mark-svg {
-      width: 32px; height: 32px;
-      display: inline-block;
+      width: 38px; height: 38px;
+      display: inline-flex; align-items: center; justify-content: center;
       background: #000;
       border-radius: 4px;
-      padding: 4px;
+      flex-shrink: 0;
     }
-    .logo-mark-svg svg { width: 100%; height: 100%; display: block; }
+    .logo-mark-svg svg {
+      width: 26px; height: 26px;
+      display: block;
+      overflow: visible;
+    }
     .logo-mark-text {
       font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 16px;
+      font-weight: 800; font-size: 18px;
       letter-spacing: -0.01em;
       color: var(--text);
       text-transform: uppercase;
+      line-height: 1;
     }
   </style>
 </head>
@@ -64,11 +69,14 @@
     <div class="container nav-inner">
       <a href="#" class="logo-mark-block">
         <span class="logo-mark-svg">
-          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Loud Colors mark">
-            <g transform="rotate(-12 40 40)">
-              <polygon points="18,30 62,30 62,44 32,44 32,68 18,68" fill="rgba(255,255,255,0.35)"/>
-              <polygon points="22,26 66,26 66,40 36,40 36,64 22,64" fill="#FCFCFC"/>
-              <polygon points="48,26 66,26 66,40 56,40" fill="rgba(255,255,255,0.55)"/>
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Loud Colors mark">
+            <g transform="rotate(-8 50 50)">
+              <!-- shadow / offset layer -->
+              <polygon points="22,32 74,32 74,50 46,50 46,78 22,78" fill="rgba(255,255,255,0.30)"/>
+              <!-- main L shape -->
+              <polygon points="28,22 80,22 80,42 52,42 52,72 28,72" fill="#FCFCFC"/>
+              <!-- diagonal cut accent on top right -->
+              <polygon points="62,22 80,22 80,42 70,42" fill="rgba(0,0,0,0.18)"/>
             </g>
           </svg>
         </span>
